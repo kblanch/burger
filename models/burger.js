@@ -14,6 +14,7 @@ var burger = {
         });
     },
     updateOne: function(values, condition, callBack){
+        console.log("In Burger JS");
         orm.updateOne("burgers", values, condition, function(response){
             callBack(response);
         });

@@ -2,11 +2,26 @@
 
 var connection = require('../config/connection.js');
 
+
+function objToSql(ob){
+    var arr = [];
+
+    for( var key in ob) {
+        if(Object.hasOwnProperty.call(ob, key)){
+            arr.push(key + '=' + ob[key]);
+        }
+    }
+
+    return arr.toString();
+}
+
+
+
 //CREATE METHODS
 var orm = {
     //selectAll()
     selectAll: function(table, callBack){
-        var q = "Select * From " + tableInput + ';';
+        var q = "Select * From " + table + ';';
         connection.query(q, function(error, result){
             if(error){
                 throw error;
@@ -31,7 +46,10 @@ var orm = {
     updateOne: function(table, columnVal, condition, callBack){
         var q = "Update " + table;
 
-        q += 'Set ' + columnVal + ' Where ' + condition; 
+        q += ' Set ' + objToSql(columnVal);
+        q += ' Where ' + condition; 
+
+        console.log(q);
 
         connection.query(q, function(error, result){
             if(error) {

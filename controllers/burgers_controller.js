@@ -28,13 +28,16 @@ router.post("/", function(request, response){
 });
 
 router.put("/:id", function(request, response){
+    console.log('IN PUT ROUTE!!!!!')
     var condition = "id = " + request.params.id;
-
+    console.log(condition);
     burger.updateOne({
         devoured: request.body.devoured
     }, condition, function(){
         response.redirect("/");
     });
+
+    console.log('Update End');
 });
 //export router
 module.exports = router;
