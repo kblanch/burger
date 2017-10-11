@@ -34,7 +34,6 @@ var orm = {
         var q = "Insert Into " + table;
         q += " (" + column + ") VALUES ( ? )";
 
-
         connection.query(q, values, function(error, result){
             if(error){
                 throw error;
